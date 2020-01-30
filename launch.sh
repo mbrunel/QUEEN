@@ -1,1 +1,1 @@
-mkdir -p ./infected && Queen.c && ./a.out
+mkdir -p ./infected && gcc Queen.c && ./a.out
