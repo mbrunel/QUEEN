@@ -21,8 +21,11 @@ static int	count_quine()
 
 void *auto_kill(void *arg)
 {
+	char call[200];
+
+	sprintf(call, "/usr/bin/kill %d", getpid());
 	sleep(1);
-	system("/usr/bin/killall Q");
+	system(call);
 	return (NULL);
 }
 
