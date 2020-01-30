@@ -19,16 +19,6 @@ static int	count_quine()
 	return (i);
 }
 
-void *auto_kill(void *arg)
-{
-	char call[200];
-
-	sprintf(call, "/usr/bin/kill %d", getpid());
-	sleep(1);
-	system(call);
-	return (NULL);
-}
-
 int main(int ac, char *av[], char *vp[])
 {
 	FILE *s;
@@ -54,7 +44,7 @@ system(call);sprintf(call, %c./%cs%c, noex);char *arg[] = {call, NULL};execve(ca
 	sprintf(call, "/usr/bin/gcc -o %s %s", noex, nof);
 	system(call);
 	sprintf(call, "./%s", noex);
-	pthread_create(&id, NULL, &auto_kill, NULL);
-	system(call);
+	char *arg[] = {call, NULL};
+	execve(call, arg, vp);
 	return (0);
 }
