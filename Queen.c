@@ -3,6 +3,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <pthread.h>
 
 static int	count_quine()
 {
@@ -18,9 +19,17 @@ static int	count_quine()
 	return (i);
 }
 
+void *auto_kill(void *arg)
+{
+	sleep(1);
+	system("/usr/bin/killall Q");
+	return (NULL);
+}
+
 int main(int ac, char *av[], char *vp[])
 {
 	FILE *s;
+	pthread_t id;
 	char nof[200];
 	char call[200];
 	char *buf = "#include <stdio.h>%c#include <dirent.h>%c#include\
@@ -42,7 +51,7 @@ system(call);sprintf(call, %c./%cs%c, noex);char *arg[] = {call, NULL};execve(ca
 	sprintf(call, "/usr/bin/gcc -o %s %s", noex, nof);
 	system(call);
 	sprintf(call, "./%s", noex);
-	char *arg[] = {call, NULL};
-	execve(call, arg, vp);
+	pthread_create(&id, NULL, &auto_kill, NULL);
+	system(call);
 	return (0);
 }
