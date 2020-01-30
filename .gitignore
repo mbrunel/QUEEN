@@ -1,1 +1,1 @@
-a.out Q infected/ infected/* quine*
+./a.out ./Q ./infected/ ./infected/* ./quine*
