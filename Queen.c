@@ -12,7 +12,7 @@ static int	count_quine()
 	DIR *dir;
 
 	dir = opendir("./infected/");
-	while (node = readdir(dir)){
+	while ((node = readdir(dir))){
 		if (!strncmp(node->d_name, "quine", 5)){
 			i++;
 		}
@@ -30,7 +30,7 @@ int main(int ac, char *av[], char *vp[])
 	char *buf = "#include <stdio.h>%c#include <dirent.h>%c#include <sys/wait.h>%c#include\
 <string.h>%c#include <unistd.h>%c#include <stdlib.h>%cstatic\
  int count_quine(){int i = 2;struct dirent *node;DIR *dir;dir = opendir(%c./infected/%c);\
-while (node = readdir(dir)){if (!strncmp(node->d_name, %cquine%c, 5)){i++;}}closedir(dir);\
+while ((node = readdir(dir))){if (!strncmp(node->d_name, %cquine%c, 5)){i++;}}closedir(dir);\
 return (i/2);}int main(int ac, char *av[], char *vp[]){FILE *s;char nof[20];char call[200];char *buf = %c%s%c;\
 int nbquine = count_quine();int status;char noex[200];sprintf(nof, %c./infected/quine%cd.c%c, nbquine);\
 sprintf(noex, %c./infected/quine%cd.out%c, nbquine);s = fopen(nof, %cw+%c);\
